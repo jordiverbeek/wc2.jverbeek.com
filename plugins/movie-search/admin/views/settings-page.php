@@ -22,7 +22,7 @@
             <tr>
                 <th>API Key</th>
                 <td>
-                    <input type="text" name="ms_api_key"
+                    <input type="password" name="ms_api_key"
                            value="<?= esc_attr($settings->get_api_key()); ?>"
                            class="regular-text">
                 </td>
