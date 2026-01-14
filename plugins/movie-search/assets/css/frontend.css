@@ -1,0 +1,11 @@
+.ms-search {
+    margin: 20px 0;
+}
+
+.ms-search input {
+    padding: 6px;
+}
+
+.ms-search button {
+    padding: 6px 12px;
+}
