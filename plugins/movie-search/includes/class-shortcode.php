@@ -29,10 +29,9 @@ class MS_Shortcode
 ?>
         <form method="get" class="ms-search">
             <input type="text" name="movie" placeholder="Zoek een film">
-            <button>Zoeken</button>
+            <button type="submit">Zoeken</button>
         </form>
 <?php
-
         if (!empty($_GET['movie'])) {
             $this->search($_GET['movie']);
         }
@@ -68,7 +67,7 @@ class MS_Shortcode
             return;
         }
 
-        echo '<ul>';
+        echo '<ul class="movie-list">';
         foreach ($data['Search'] as $movie) {
             // Stap 2: haal detail info op per film
             $detail_params = [
@@ -85,8 +84,18 @@ class MS_Shortcode
             $title = esc_html($details['Title']);
             $rating = isset($details['imdbRating']) ? esc_html($details['imdbRating']) : 'n.v.t.';
             $released = isset($details['Released']) ? esc_html($details['Released']) : 'n.v.t.';
+            $poster = isset($details['Poster']) && $details['Poster'] !== 'N/A' ? esc_url($details['Poster']) : '';
 
-            echo "<li><strong>$title</strong> — Rating: $rating — Released: $released</li>";
+            echo '<li class="movie-card">';
+            if ($poster) {
+                echo "<img src='$poster' alt='$title poster' class='movie-poster'>";
+            }
+            echo "<div class='movie-info'>";
+            echo "<h3 class='movie-title'>$title</h3>";
+            echo "<p class='movie-rating'>Rating: $rating</p>";
+            echo "<p class='movie-released'>Released: $released</p>";
+            echo "</div>";
+            echo '</li>';
         }
         echo '</ul>';
     }
